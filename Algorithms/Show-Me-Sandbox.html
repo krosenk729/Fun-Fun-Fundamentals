@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Talk Algorithms to Me</title>
+	<meta charset="utf-8">
+	<meta name="description" content="Practice some short and sweet algorithms. Need it to run? Bind it to my button and go go go">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<style type="text/css">
+	.btn1{}
+	.btn2{}
+	.btn3{}
+	#id1{}
+	#id2{}
+	#id3{}
+</style>
+</head>
+<body>
+	<div class="container">
+		<main>
+			<div class="jumbotron text-light bg-dark">
+				<h1 class="display-3">#ID1 and #BTN1</h1>
+				<blockquote class="id1" id="id1">Silvisaurus Gobisaurus Diamantinasaurus Rapetosaurus Iguanodon Diamantinasaurus Maleevus Xenoposeidon Argentinosaurus Lirainosaurus Euronychodon Teyuwasu Zanclodon Hypacrosaurus Sigilmassasaurus Cryptovolans Rileyasuchus</blockquote>
+
+				<button class="btn btn1" id="btn1">Do Something</button>
+			</div>
+			<div class="row center">
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">#ID2 and #BTN2</h4>
+							<p class="card-text" class="id2" id="id2">Tichosteus Chingkankousaurus Iuticosaurus Arizonasaurus Dyslocosaurus Acristavus Rhoetosaurus Lametasaurus Nanosaurus Priodontognathus </p>
+							<button href="#" class="btn btn-info btn2" id="btn2">Do More Things</button>
+							<a href="#" class="text-danger un-btn un-btn2" id="un-btn2">Do Less Things</a>
+						</div>
+					</div>
+				</div><!--col-->
+				<div class="col">
+					<div class="card">
+						<div class="card-body">
+							<h4 class="card-title">#ID3 and #BTN3</h4>
+							<p class="card-text" class="id3" id="id3">Oryctodromeus Aardonyx Yinlong Eotyrannus Nigersaurus Kinnareemimus Eobrontosaurus Dinotyrannus Balochisaurus</p>
+							<button href="#" class="btn btn-info btn3" id="btn3">Do All the Things</button>
+							<a href="#" class="text-danger un-btn un-btn3" id="un-btn3">Or Not</a>
+						</div>
+					</div>
+				</div><!--col-->
+			</div>
+
+		</main>
+	</div>
+	<!--Here is where the fun begins -->
+	<script type="text/javascript" src="Array-Partay.js"></script>
+	<script type="text/javascript">
+		$('#btn1').on('click', function(){
+			// console.log(this);
+			
+			let v = "hello";
+			console.log(`changing 1 to ${v}`);
+			$('#id1').html(v);
+		});
+
+
+
+		$('#btn2').on('click', function(){
+
+			
+			let v = "hello";
+			console.log(`changing 2 to ${v}`);
+			$('#id2').html(v);
+		});
+
+
+
+		$('#btn3').on('click', function(){
+
+			
+			let v = "hello";
+			console.log(`changing 3 to ${v}`);
+			$('#id3').html(v);
+		});
+
+	</script>
+</body>
+</html>
