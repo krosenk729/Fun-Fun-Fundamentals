@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Test Speed of Scripts</title>
+	<meta charset="utf-8">
+	<meta name="description" content="link to your script file and test how fast your code is using a console timer or a timer object">
+</head>
+<body>
+	<div class="my-div">
+		<h1>Heyyy</h1>
+		<p id='demo'></p>
+		<button id='clicker'>Smash Me for a Quick Test</button>
+		<button id='clickest'>Smash Me for a Long Test</button>
+	</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!-- color for later https://www.stitchdata.com/integrations/webhooks/ --> 
+<script type="text/javascript">
+	$(document).ready(function(){
+
+		$('#clicker').click(function(){
+			// Start timer
+			console.time('testSomeCode');
+
+			// Change out this line to test your function
+			testThisCode();
+
+			// End the timer & get elapsed time
+			console.timeEnd('testSomeCode');
+		});
+
+		$('#clickest').click(function(){
+			let testingThis = new SpeedTest( testThisCode, 100000 );
+			testingThis.runTotalTest();
+			testingThis.runAvgTest();
+		});
+
+		function testThisCode( n ){
+			const myConstArr = new Array( n ).fill({'why':'because'});
+
+			let t = myConstArr[Symbol.iterator]();
+			while(t.next().done === false ){
+				// console.log( t.value );
+				t.next();
+			}
+		}
+
+		// SpeedTest Class
+		function SpeedTest(testCode, testParams, reps){
+			this.testCode = testCode;
+			this.testParams = testParams || '';
+			this.reps = reps || 10;
+			this.latesttime = 0;
+		}
+
+		SpeedTest.prototype = {
+			runTotalTest: function(){
+				if( this.checkIsBroke() ){ 
+					return; 
+				}
+
+				let timeBegin, timeEnd, timeArray = [], x = this.reps;
+
+				for(let i = 0; i < x ; i++){
+					timeBegin = +new Date();
+					this.testCode( this.testParams );
+					timeEnd = +new Date();
+					timeArray.push( timeEnd - timeBegin );
+				}
+
+				console.dir('Results are: '+ timeArray);
+				timeArray.sort();
+				console.dir('Min: ' + timeArray[0] + 'ms, Max: ' + timeArray[x - 1] + 'ms');
+				this.latesttime = timeArray.reduce( (t, i) => t + i ) / x ; 
+				console.dir('Avg: ' + this.latesttime + ' ms' );
+			},
+			runAvgTest: function(){
+				if( this.checkIsBroke() ){ return; }
+
+				let timeBegin, timeEnd, timeSum = 0, x = this.reps;
+
+
+				for(let i = 0; i < x ; i++){
+					timeBegin = +new Date();
+					this.testCode( this.testParams );
+					timeEnd = +new Date();
+					timeSum += timeEnd - timeBegin ;
+				}
+				this.latesttime = timeSum / x ;
+				console.dir('Avg: ' + this.latesttime + 'ms in ' + x + ' runs');
+			},
+			checkIsBroke: function(){
+				return (this.testCode(this.testParams) === false);
+			}
+
+		};
+	});
+
+</script>
+</body>
+</html>
