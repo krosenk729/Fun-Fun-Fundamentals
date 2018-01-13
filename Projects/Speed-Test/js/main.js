@@ -1,28 +1,28 @@
-import * as TESTFACTORY from './test.js';
-import * as YOURCODE from './your-code.js';
+// import * as TESTFACTORY from './test.js';
+// import * as YOURCODE from './your-code.js';
 
 $(document).ready(function(){
-
 	$('button').click(function(){
-		let testRun = ($(this).parent().attr('id') === 1) 
-			? new SpeedTest(testThisCode, paramsFor1) 
-			: new SpeedTest(testOtherCode, paramsFor2);
+		let t,
+		numRuns = $('#numruns').val().trim(),
+		testRun = ($(this).parent().attr('id') === 1) 
+			? new SPEEDTEST(YOURCODE.testThisCode, YOURCODE.paramsFor1, numRuns) 
+			: new SPEEDTEST(YOURCODE.testOtherCode, YOURCODE.paramsFor2, numRuns);
 
-		console.log(testRun);
 		switch($(this).data('type')){
 			case "quick":
 			default:
-				testRun.runQuick();
+				t = testRun.runQuick();
 				break;
 			case "avg":
-				testRun.runTotalTest();
+				t = testRun.runTotalTest();
 				break;
 			case "detail":
-				testRun.runAvgTest();
+				t = testRun.runAvgTest();
 				break;
 		}
 
-		$(this).nextUntil('.test-results').text('Check the console for the results!');
+		$(this).parent().find('.test-results').html(t);
 	});
 
 });

@@ -1,4 +1,4 @@
-export SPEEDTIMER = (function(){
+var SPEEDTEST = (function(){
 	function SpeedTest(testCode, testParams, reps){
 		this.testCode = testCode;
 		this.testParams = testParams || '';
@@ -14,6 +14,7 @@ export SPEEDTIMER = (function(){
 			console.time('quick-test');
 			this.testCode( this.testParams );
 			console.timeEnd('quick-test');
+			return 'Only the console can tell';
 		},
 		runTotalTest: function(){
 			if( this.checkIsBroke() ){ 
@@ -29,11 +30,12 @@ export SPEEDTIMER = (function(){
 				timeArray.push( timeEnd - timeBegin );
 			}
 
-			console.dir('Results are: '+ timeArray);
+			console.dir(`Results are: ${timeArray}`);
 			timeArray.sort();
-			console.dir('Min: ' + timeArray[0] + 'ms, Max: ' + timeArray[x - 1] + 'ms');
+			console.dir(`Min: ${timeArray[0]} ms, Max: ${timeArray[x - 1]} ms`);
 			this.latesttime = timeArray.reduce( (t, i) => t + i ) / x ; 
-			console.dir('Avg: ' + this.latesttime + ' ms' );
+			console.dir(`Avg: ${this.latesttime} ms in ${x} runs` );
+			return `Average of ${this.latesttime} in ${x} runs <br>Check the console for the rest!`;
 		},
 		runAvgTest: function(){
 			if( this.checkIsBroke() ){ return; }
@@ -48,11 +50,15 @@ export SPEEDTIMER = (function(){
 				timeSum += timeEnd - timeBegin ;
 			}
 			this.latesttime = timeSum / x ;
-			console.dir('Avg: ' + this.latesttime + 'ms in ' + x + ' runs');
+			console.dir(`Avg: ${this.latesttime} ms in ${x} runs`);
+			return `Avgerage ${this.latesttime} ms in ${x} runs`;
 		},
 		checkIsBroke: function(){
 			return (this.testCode(this.testParams) === false);
 		}
 
 	};
+
+	return SpeedTest;
+
 })();
