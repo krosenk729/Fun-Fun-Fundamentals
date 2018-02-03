@@ -25,7 +25,7 @@ $(document).ready(function(){
 
 });
 
-const myStorageName = 'mySavedStorageName';
+const myStorageName = 'mySavedStorageName4';
 let currentStore = {
 	localStore: {},
 	sessStore: {},
@@ -55,104 +55,6 @@ let currentStore = {
 		return true;
 	},
 
-	storeIndexed: function(newName, newVal){
-		this.indexedStore[newName] = newVal;
-
-		window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-		let request = window.indexedDB.open(myStorageName, 1);
-		let db;
-
-		request.onupgradeneeded = function(event){
-			console.log('upgrade needed');
-			db = request.result; 
-			let objStore = db.createObjectStore(myStorageName, {keyPath: 'names'}); 
-			let indx = objStore.createIndex('by_vals', 'values' , {unique: false}); 
-
-			// for(let i in currentStore.storeIndexed){
-			// 	objStore.put({i: currentStore.storeIndexed[i]});
-			// }
-			console.log({'names': newName, 'values': newVal});
-			objStore.put({'names': newName, 'values': newVal});
-		};
-
-		request.onsuccess = function(event){
-			console.log('db success');
-			// db = request.result;
-			db = event.target.result;
-			// console.log(db);
-			// console.log(event);
-			let transxtion = db.transaction(myStorageName, 'readwrite');
-			console.log('transaction', transxtion);
-			let objStore = transxtion.objectStore(myStorageName);
-			console.log(objStore);
-			
-			// for(let i in currentStore.storeIndexed){
-			// 	objStore.put({i: currentStore.storeIndexed[i]});
-			// }
-			console.log({'names': newName, 'values': newVal});
-			objStore.put({'names': newName, 'values': newVal});
-			
-		};
-
-		request.onerror = function(err){
-			console.log('There was a local storage error: ', err);
-		};
-
-		// db.close();
-	},
-
-	retrieveIndexed: function(){
-		window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
-		let request = window.indexedDB.open(myStorageName, 1); 
-		let db;
-
-		if(!request){ return false; }
-
-		request.onupgradeneeded = function(event){
-			console.log('upgrade needed');
-			db = request.result; 
-			let objStore = db.createObjectStore(myStorageName, {keyPath: 'names'}); 
-			let indx = objStore.createIndex('by_vals', 'values' , {unique: false}); 
-
-			// for(let i in currentStore.storeIndexed){
-			// 	objStore.put({i: currentStore.storeIndexed[i]});
-			// }
-			console.log({'names': newName, 'values': newVal});
-			objStore.put({'names': newName, 'values': newVal});
-		};
-
-		request.onsuccess = function(event){
-			db = request.result;
-			console.log(db);
-
-			if( db.objectStoreNames.length > 0 ){
-
-				let transact = db.transaction(myStorageName, 'readonly');
-				console.log('data found');
-
-				let objStore = transact.objectStore(myStorageName);
-				let cursorRequest = store['names'].openCursor();
-
-				cursorRequest.onsuccess = function(event){
-					let c = event.target.result ;
-					if(c){
-						currentStore.indexedStore[c.name] = c.value;
-						c.continue();
-					}
-				};
-
-			} else {
-				console.log('data not found');
-				this.indexedStore = {};
-			}
-			
-			db.close();
-		};
-
-		addToScreen(this.indexedStore, '#index-items');
-		return this.indexedStore;
-	},
-
 	retrieveLocal: function(){
 		this.localStore = JSON.parse( localStorage.getItem(myStorageName) ) || {};
 		addToScreen(this.localStore, '#local-items');
@@ -170,11 +72,74 @@ let currentStore = {
 		this.cookieStore = c[myStorageName] || {};
 		addToScreen(this.cookieStore, '#cookie-items');
 		return this.cookieStore;
+	},
+
+	storeIndexed: function(newName, newVal){
+		this.indexedStore[newName] = newVal;
+		let request = window.indexedDB.open(myStorageName, 1);
+		let db;
+
+		request.onsuccess = function(event){
+			console.log('db success event', event.target.result, 'request results', request.result);
+			db = request.result;
+
+			// [myStorageName] might not need brackets
+			let transxtion = db.transaction([myStorageName], 'readwrite');
+			transxtion.oncomplete = (e) => { console.log('transxtion complete', e); };
+			transxtion.onerror = (e) => { console.log('transxtion error', e); };
+
+			let objStore = transxtion.objectStore(myStorageName);
+			console.log('about to add ', {name: newName, val: newVal});
+
+			let objReq = objStore.add({name: newName, val: newVal});
+			objReq.onsuccess = (e) => console.log('add success', e);
+			objReq.onerror = (e) => console.log('add error', e);
+		};
+
+		request.onerror = function(err){
+			console.log('There was a local storage error: ', err);
+		};
+	},
+
+	retrieveIndexed: function(){
+		window.indexedDB = window.indexedDB || window.mozIndexedDB || window.webkitIndexedDB || window.msIndexedDB;
+		let request = window.indexedDB.open(myStorageName, 1); 
+		console.log('retrieveIndexed request ', request);
+		let db ;
+
+		if(!request){ return false; }
+		request.onerror = (e) => console.log('error opening db', e);
+
+		request.onupgradeneeded = function(event){
+			console.log('upgrade needed');
+			db = event.target.result; 
+			db.onerror = (e) => { console.log('error on upgrade'); };
+
+			let objStore = db.createObjectStore(myStorageName, {keyPath: 'name'}); 
+			objStore.createIndex('val', 'val' , {unique: false}); 
+			console.log('object store created', objStore);
+		};
+
+		request.onsuccess = function(event){
+			db = request.result;
+			console.log('request success, no upgrade needed', db);
+			let objStore = db.transaction(myStorageName).objectStore(myStorageName);
+			objStore.openCursor().onsuccess = function(event){
+				let crsr = event.target.result;
+				if(crsr){
+					addToScreen({[crsr.value.name] : crsr.value.val} , '#index-items');
+					crsr.continue();
+				} else {
+					console.log('all cursor entries shown');
+				}
+			};
+
+		};
 	}
 };
 
+// Adds key/value pair from v to screen at selector s location
 function addToScreen(v, s){
-	// console.log('adding to screen: ', v, s);
 	for(let property in v){
 		$(s).append(`<p>${property}: ${v[property]}`);
 	}
