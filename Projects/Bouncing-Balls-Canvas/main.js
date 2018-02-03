@@ -65,6 +65,7 @@ Ball.prototype.bounceCollide = function(){
 }
 
 function ballloop(){
+	// adds tail
 	ctx.fillStyle = 'rgba(0, 0, 0, 0.25)';
 	ctx.fillRect(0, 0, width, height);
 
@@ -80,12 +81,31 @@ function ballloop(){
 		balls.push(ball);
 	}
 
-	for(let i=0, m=balls.length; i<m; i++){
-		balls[i].draw();
-		balls[i].move();
-		balls[i].bounceCollide();
-	}
+/*
+	for(let i = 0; i < 25; i++){
+		let ball = new Ball( 
+			myRandom(0, width), 
+			myRandom(0, height),
+			myRandom(-10,10),
+			myRandom(-10, 10),
+			'rgb(' + myRandom(0,255) + ',' + myRandom(0,255) + ','+ myRandom(0,255) + ')' ,
+			myRandom(10,20)
+		);
+		balls.push(ball);
 
-	requestAnimationFrame(ballloop);
+	}*/
+
+	// for(let i=0, m=balls.length; i<m; i++){
+	// 	balls[i].draw();
+	// 	balls[i].move();
+	// 	balls[i].bounceCollide();
+	// }
+	balls.forEach(function(item){
+		item.draw();
+		item.move();
+		// item.bounceCollide();
+	})
+
+	// requestAnimationFrame(ballloop);
 }
 ballloop();

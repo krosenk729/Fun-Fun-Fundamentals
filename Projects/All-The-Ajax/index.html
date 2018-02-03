@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>What's The Tweet About?</title>
+	<meta charset="utf-8">
+	<meta name="description" content="What is trending?">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<style type="text/css">
+	.btn1{}
+	.btn2{}
+	.btn3{}
+	#id1{}
+	#id2{}
+	#id3{}
+</style>
+</head>
+<body>
+	<div class="container-fluid">
+		<main>
+			<div class="jumbotron text-light bg-dark">
+				<h1 class="display-5">What Sort of API Card Do You Feel Like Seeing?</h1>
+				<blockquote>Call, call, call your APIs; gently across the webservices data stream... <br>merrily, merrily, merrily, merrily, callbacks make it show on the screen</blockquote>
+
+				<button class="btn" id="quote-btn">Get Quotes</button>
+				<button class="btn" id="news-btn">Get News</button>
+				<button class="btn" id="tweet-btn">Get Tweets</button>
+				<button class="btn" id="redd-btn">Get Reddits</button>
+				<button class="btn" id="gif-btn">Get Gifs</button>
+				<button class="btn" id="weather-btn">Get Weather</button>
+				<button class="btn" id="traffic-btn">See ATL Traffic</button>
+			</div>
+			<div class="row center">
+			</div>
+
+		</main>
+	</div>
+	<!--Here is where the fun begins -->
+	<script type="text/javascript" src="script.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('#quote-btn').click( getQuotes );
+			$('#news-btn').click( getNews );
+			$('#tweet-btn').click(  );
+			$('#redd-btn').click( getReddits );
+			$('#gif-btn').click( getGiphy );
+			$('#weather-btn').click(  );
+			$('#traffic-btn').click(  );
+
+			// Listeners for Cards 
+			$('.row').on('click','.text-danger', function(){
+				$(this).parents('.outer-card').remove();
+			});
+
+		});
+	</script>
+</body>
+</html>

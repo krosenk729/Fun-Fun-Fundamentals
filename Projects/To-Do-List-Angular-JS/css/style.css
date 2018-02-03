@@ -1,0 +1,61 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+.toggler{
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+.toggler input{
+  display: none;
+}
+.toggler-round{
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #CCC;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  border-radius: 34px;
+}
+.toggler-round:before{
+  position: absolute;
+  content: '';
+  border-radius: 50%;
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+input:checked + .toggler-round{
+  background-color: #2196F3;
+}
+input:focus + .toggler-round{
+  box-shadow: 0 0 1px #2196F3;
+}
+input:checked + .toggler-round:before{
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+.card-remove{
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}
+.item{
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="myApp">
 <head>
 	<title>My SPA</title>
 	<meta charset="utf-8">
@@ -7,14 +7,16 @@
 	<link href="css/main.css" rel="stylesheet" />
 	<!-- Include the AngularJS library -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.0.1/angular.min.js"></script>
+    <script src="https://code.angularjs.org/1.2.28/angular-route.min.js"></script>
     <!-- Modules -->
     <script src="js/app.js"></script>
     <!-- Controllers -->
-    <!-- <script src="js/controllers/NavCtrl.js"></script> -->
+    <script src="js/controllers/NavCtrl.js"></script>
+    <!-- Directives -->
+    <script src="js/directives/pageTiles.js"></script>
 </head>
-
-<body ng-app="myApp">
-	<div ng-controller="NavCtrl">
+<body ng-controller="NavCtrl">
+	<div>
 		<nav>
 			<h4>{{webContents[curNav].name}}</h4>
 			<ol class="nav-indicators">
@@ -23,15 +25,13 @@
 		</nav>
 	<main>
 		<div class="row">
-			<div ng-repeat="c in webContents[curNav].contents">
-				<h3 class="title">{{c.name}}</h3>
-				<h4 class="subtitle">{{c.uvp | uppercase}}</h4>
-				<div class="body">{{c.desc}}</div>
-				<a href="{{c.link}}">{{c.linkName | uppercase}}</a>
-				<img ng-src="{{c.img}}">
+			<div ng-repeat="contents in webContents[curNav].contents">
+				<page-tiles tile="contents"></page-tiles>
 			</div>
 		</div>
+		<!-- https://tympanus.net/codrops/2017/10/17/dynamic-shape-overlays-with-svg/ -->
 	</main>
 	</div>
+	<footer ng-view></footer>
 </body>
 </html>

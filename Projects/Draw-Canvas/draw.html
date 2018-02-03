@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<meta charset="utf-8">
+
+	<meta name="description" content="Stuff here">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+</head>
+<body>
+	<canvas id="draw" width="800" height="800"></canvas>
+    <script type="text/javascript">
+    	const canvas = document.querySelector('#draw'),
+    		ctx = canvas.getContext('2d');
+    	canvas.width = window.innerWidth;
+    	canvas.height = window.innerHeight;
+
+    	let isDrawing = false,
+    		lastX = lastY = 0,
+    		hue = 0,
+    		w = 1,
+    		dir = 0.25;
+
+    	ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+    	ctx.lineWidth = w;
+    	ctx.lineJoin = ctx.lineCap = 'round';
+
+    	function draw(e){
+    		if(!isDrawing){
+    			return ; 
+    		}
+    		ctx.strokeStyle = `hsla(${hue}, 100%, 50%, 1)`;
+    		ctx.lineWidth = w;
+    		
+    		ctx.beginPath();
+    		ctx.moveTo(lastX, lastY);
+    		ctx.lineTo(e.clientX, e.clientY);
+    		ctx.stroke();
+
+    		[lastX, lastY] = [e.x, e.y];
+    		hue++;
+    		if(w > 45 || w < 5){
+    			dir *= -1;
+    		}
+    		w += dir;
+    	}
+
+    	canvas.addEventListener('mousemove', (e) => draw(e) );
+    	canvas.addEventListener('mousedown', (e)=> {
+    		isDrawing = true;
+    		[lastX, lastY] = [e.x, e.y];
+    	});
+    	canvas.addEventListener('mouseup', ()=> isDrawing = false);
+    	canvas.addEventListener('mouseout', ()=> isDrawing = false);
+    </script>
+    <script type="text/javascript">
+    	// function ColorStop(color, name){
+    	// 	this.color = color;
+    	// 	this.name = name;
+    	// }
+		// colorStops = {
+		// 	colors: [
+    	// 		0: new ColorStop('rgb(41, 243, 154)', 'green'),
+	    // 		1: new ColorStop('rgb(0, 159, 252)', 'blue'),
+	    // 		2: new ColorStop('rgb(100, 26, 207)', 'periwinkle'),
+	    // 		3: new ColorStop('rgb(197, 113, 244)', 'light purple'),
+	    // 		4: new ColorStop('rgb(249, 113, 206)', 'pink'),
+	    // 		5: new ColorStop('rgb(248, 130, 153)', 'redorange'),
+	    // 		6: new ColorStop('rgb(247, 152, 30)', 'orange'),
+	    // 		7: new ColorStop('rgb(254, 225, 64)', 'yellow'),
+	    // 		8: new ColorStop('rgb(66, 234, 128)', 'light green')
+	    // 		],
+	    // 	num: this.colors.length,
+	    // 	curr: num - 1 ,
+	    // 	addStop: function(color, name){
+	    // 		this.colors.push( new ColorStop(color, name) );
+	    // 		this.num = this.colors.length;
+	    // 	},
+	    // 	nextStop: function(){
+	    // 		this.curr = (this.curr + 1 >= this.num) ? 0 : this.curr + 1;
+	    // 		return this.colors[ this.curr ];
+	    // 	}
+		// };
+    </script>
+</body>
+</html>

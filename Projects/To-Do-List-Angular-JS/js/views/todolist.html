@@ -1,0 +1,36 @@
+<div class="row all-cards-wrapper">
+  <!-- One -->
+  <div ng-repeat="t in $ctrl.allToDos" class="card-wrapper col">
+
+    <div class="card">
+      <div class="card-header">
+        <h3 class="card-title">{{t.name}}</h3>
+        <button class="card-remove">X</button>
+      </div>
+      <div class="card-body">
+        <div class="item" ng-repeat="i in t.items">
+          <label class="toggler">
+            <input type="checkbox">
+            <span class="toggler-round"></span>
+          </label>
+          <div class="item-to-do">{{i}}</div>
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row add-card-wrapper">
+  <div class="add-card card">
+    <div class="card-header">
+        <div class="btn" ng-repeat="t in $ctrl.allToDos">{{t.name}}</div>
+        <div class="btn btn-selected">New: <input type="text" id="new-to-do" ng-model=""></div>
+    </div>
+    <div class="card-body">
+      <form id="new-item-form">
+        <label for="new-item">Add:</label>
+        <input type="text" id="new-item" ng-model="">
+        <button class="btn">+</btn>
+      </form>
+    </div>
+  </div>
+</div>

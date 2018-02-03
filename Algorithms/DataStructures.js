@@ -1,5 +1,5 @@
 /* Set Up for Success */
-// write functions for Set coollections
+// write functions for Set collections
 // to calculate isSuperSet, union, intersection and difference 
 
 Set.prototype.isSuperSet = function(subset){
@@ -33,5 +33,6 @@ Set.prototype.difference = function(nextset){
 //tests 
 
 
-
-
+/*  */
+// 
+// 

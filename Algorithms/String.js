@@ -53,3 +53,4 @@ var t1 = typeof findLongestWord("hi") === "number";
 var t2 = findLongestWord("The quick brown fox jumped over the lazy dog") === 6;
 var t3 = findLongestWord("The quick .................") === 5;
 console.log(t1, t2, t3);
+
