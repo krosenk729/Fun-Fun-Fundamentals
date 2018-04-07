@@ -29,10 +29,3 @@ Set.prototype.difference = function(nextset){
   }
   return interSet;
 }
-
-//tests 
-
-
-/*  */
-// 
-// 

@@ -1,0 +1,24 @@
+// **************************************************************/
+// Utilities 
+// **************************************************************/
+
+@mixin boxshadow($insetH: 0, $insetV: 1px, $insetB: 3px, $insetC: rgba(0, 0, 0, 0.3), $outsetH: 0, $outsetV: 1px, $outsetB: 3px, $outsetC: rgba(255, 255, 255, 0.3)){
+	-webkit-box-shadow: inset $insetH $insetV $insetB $insetC, $outsetH $outsetV $outsetB $outsetC;
+	box-shadow: inset $insetH $insetV $insetB $insetC, $outsetH $outsetV $outsetB $outsetC;
+}
+
+@mixin transition($which: all, $time: 1s, $how: ease-in-out){
+	-webkit-transition: $which $time $how;
+	-moz-transition: $which $time $how;
+	-ms-transition: $which $time $how;
+	-o-transition: $which $time $how;
+	transition: $which $time $how;
+}
+
+@mixin gradient-bg($left, $right: darken($left, 25%)){
+	background: $left; // backup
+	background: -webkit-linear-gradient($left, $right);
+	background: -o-linear-gradient($left, $right);
+	background: -moz-linear-gradient($left, $right);
+	background: linear-gradient($left, $right);
+}

@@ -103,7 +103,7 @@ function blockScope() {
 }
 
 function ES6fixedBlockScope() {
-	var myVar = 'hello!';
+	let myVar = 'hello!';
 	{
 		let myVar = 'hi!';
 	}

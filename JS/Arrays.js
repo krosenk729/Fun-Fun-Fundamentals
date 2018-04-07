@@ -1,3 +1,15 @@
+/* Flatten an Array */
+// create a function that takes in an array of arrays
+// and returns a single 1-dimensional array 
+
+function flatten(arr) {
+  return arr.reduce((acc, val) => acc.concat(val), []);
+}
+// tests
+var t1 = flatten( [ [1], [2, 3], [], [4] ] ) === [1, 2, 3, 4];
+console.log(t1);
+
+
 /* Create a Range */
 // create a function that takes in a single array with two numeric values
 // return an array that contains a range of those values and all values in between
