@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lazy Images</title>
+	<meta charset=utf-8>
+	<meta name=description content="">
+	<meta name=viewport content="width=device-width, initial-scale=1">
+	<style type="text/css">
+		img{ 
+			width: 100%;
+			max-width: 550px;
+			border: 12px solid black;
+			box-shadow: 10px 10px 0 grey;
+			margin-bottom: 75px;
+		}
+	</style>
+</head>
+<body>
+	<img src="" data-src="https://images.pexels.com/photos/938962/pexels-photo-938962.jpeg">
+	<img src="" data-src="https://images.pexels.com/photos/940301/pexels-photo-940301.jpeg">
+	<img src="" data-src="https://images.pexels.com/photos/254717/pexels-photo-254717.jpeg">
+	<img src="" data-src="https://images.pexels.com/photos/938969/pexels-photo-938969.jpeg">
+
+	<script type="text/javascript">
+
+		function lazyImg() {
+			var imgArr = document.getElementsByTagName('img');
+			for (var i = 0; i < imgArr.length; i++) {
+				if(imgArr[i].getAttribute('data-src')) {
+					imgArr[i].setAttribute('src', imgArr[i].getAttribute('data-src'));
+				}
+			} 
+		}
+		window.onload = lazyImg;
+
+
+	</script> 
+</body>
+</html>

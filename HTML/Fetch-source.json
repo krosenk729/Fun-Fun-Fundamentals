@@ -1,0 +1,37 @@
+[
+   {
+      "name": "Caffe Latte",
+      "desc": "A single shot of espresso in steamed (not frothed) milk. The ratio of milk to coffee should be about 3:1",
+      "tags": ["coffee", "espresso", "milk", "steamed"]
+   },
+   {
+      "name": "Cafe au Lait",
+      "desc": "Similar to a latte but uses brewed coffee instead of espresso with a 1:1 coffee to milk ratio",
+      "tags": ["coffee", "drip coffee", "milk", "steamed"]
+   },
+   {
+      "name": "Americano",
+      "desc": "A single shot of espresso with about 7 ounces of hot water added to the mix",
+      "tags": ["coffee", "espresso", "black"]
+   },
+   {
+      "name": "Cappuccino",
+      "desc": "Equal parts espresso, steamed milk, and frothed milk",
+      "tags": ["coffee", "espresso", "milk", "steamed"]
+   },
+   {
+      "name": "Dry Cappuccino",
+      "desc": "Regular cappuccino, only with a smaller amount of foam, and no steamed milk at all",
+      "tags": ["coffee", "espresso", "milk", "foam"]
+   },
+   {
+      "name": "Cafe Macchiato",
+      "desc": "A single shot of espresso with steamed milk added. The ratio of milk to coffee should be 4:1",
+      "tags": ["coffee", "espresso", "milk"]
+   },
+   {
+      "name": "Cafe Breva",
+      "desc": "Regular cappuccino made with half-and-half instead of milk",
+      "tags": ["coffee", "espresso", "half-and-half"]
+   }
+]

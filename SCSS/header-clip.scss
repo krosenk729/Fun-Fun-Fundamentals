@@ -1,0 +1,18 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins');
+
+
+.clip {
+	background-image: url("https://images.pexels.com/photos/691710/pexels-photo-691710.jpeg");
+	font-family: Poppins;
+	font-size: 7em;
+	font-weight: 800;
+	line-height: 1;
+	position: relative;
+	display: inline-block;
+	margin: .25em 0;
+	padding: .25em 0;
+	color: #fff;
+	-webkit-background-clip: text;
+	background-clip: text;
+	-webkit-text-fill-color: transparent;
+}

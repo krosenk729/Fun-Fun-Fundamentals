@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Coffee Type-Ahead</title>
+	<meta charset="utf-8">
+
+	<meta name="description" content="Search for coffee drinks BECAUSE YOU SHOULD">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+	<style type="text/css">
+	.highlights{
+		font-weight: bold;
+	}
+	.card li{
+		display: inline;
+		padding: 2em;
+		color: grey;
+	}
+	</style>
+
+</head>
+<body onratechange="loadAtFirst()">
+	<main>
+		<div class="row">
+			<div class="col s10 offset-s1">
+				<form>
+					<label for="coffee-search">Search:</label>
+					<input type="text" name="coffee-search" id="coffee-search" placeholder="coffee">
+				</form>
+				<div id="card-list">
+				</div>
+			</div>
+		</div>
+	</main
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		const endpoint = './Fetch-source.json';
+		const drinks = [];
+		fetch(endpoint)
+			.then( blob => blob.json() )
+			.then( data => drinks.push(...data))
+			.then( () => {
+				document.querySelector('#coffee-search').dispatchEvent( new Event('keyup')); 
+			});
+
+		function searchCoffeeAndShow(){
+			const matchedCoffees = filterCoffees( this.value , drinks );
+			let coffeeFrag = matchedCoffees.reduce((t, c) => { 
+				return t + makeCard(c, this.value);
+			}, '');
+			document.querySelector('#card-list').innerHTML = coffeeFrag;
+		}
+
+		function filterCoffees( searchQ, coffeeToSearch ){
+			return coffeeToSearch.filter( coffee =>{
+				searchQ = searchQ || `coffee`;
+				const regex = new RegExp( searchQ.trim(), 'gim');
+				return coffee.name.match(regex) || 
+					coffee.desc.match(regex) || 
+					coffee.tags.join().match(regex);
+			});
+		}
+
+		function makeCard( coffee, highlights = '' ){
+			highlights = highlights || `coffee`;
+			const regex = new RegExp(highlights.trim(), 'gim');
+			let tags = coffee.tags.reduce((t, c)=>{ 
+				return t + `<li>${c.replace(regex, `<span class="highlights">${highlights}</span>`)}</li>` 
+			}, '');
+			return `
+			<div class="card">
+				<div class="card-content">
+					<h3 class="card-title">${coffee.name.replace(regex, `<span class="highlights">${highlights}</span>`)}</h3>
+					<p>${coffee.desc.replace(regex, `<span class="highlights">${highlights}</span>`)}</p>
+					<ul>
+						${tags}
+					</ul>
+				</div>
+			</div>
+			`;
+		}
+
+		document.querySelector('#coffee-search').addEventListener('keyup', searchCoffeeAndShow);
+
+	</script>
+</body>
+</html>
