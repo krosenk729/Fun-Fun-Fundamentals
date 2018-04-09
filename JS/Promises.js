@@ -1,4 +1,4 @@
-/*
+/********************************************
 new Promise( function (resolve, reject) { ... } );
 */
 
@@ -22,7 +22,7 @@ delay(400)
 });
 
 
-/*
+/********************************************
 Auto-Chaining Promises
 */
 
@@ -34,7 +34,7 @@ Auto-Chaining Promises
 .then(()=> console.log("all done"));
 
 
-/*
+/********************************************
 Promise.all()
 */
 

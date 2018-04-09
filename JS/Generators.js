@@ -1,4 +1,4 @@
-/*
+/*******************************************
 Pause / play generator
 */
 
@@ -12,7 +12,7 @@ var it = gen(); // nothing happens
 it.next(); // hello
 it.next(); // world
 
-/*
+/*******************************************
 Yield a value
 */
 
@@ -29,3 +29,4 @@ it.next(); // {value: 2, done: false}
 it.next(); // {value: 3, done: false}
 
 it.next(); // {value: undefined, done: true}
+

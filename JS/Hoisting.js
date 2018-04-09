@@ -1,4 +1,6 @@
-/* Here are some hoisting things */
+/********************************************
+ Here are some hoisting things
+*/
 
 /* First Things Not First */
 // First come declarations 
@@ -55,7 +57,9 @@ function firstNotFirst(){
 }
 
 
-/* Hoising Can Be Trouble */
+/********************************************
+ Hoising Can Be Trouble
+ */
 // if you don't put things in the right order
 // sometimes hoisting makes it okay but sometimes no
 // yikes!
@@ -89,7 +93,9 @@ function foundTheTrouble(){
 
 }
 
-/* Block-Level Scope */
+/********************************************
+ Block-Level Scope 
+*/
 // you know how curly braces define a code block?
 // what does that mean for your variable scopes? 
 // (okay, cheating, this isn't totally hoisting related)

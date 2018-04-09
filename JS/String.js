@@ -1,4 +1,6 @@
-/* Reverse a String */
+/*******************************************
+ Reverse a String
+*/
 //Reverse the provided string
 function reverseString(str) {
   return str.split('').reverse().join('');
@@ -13,8 +15,9 @@ console.log(t1, t2, t3, t4);
 
 
 
-
-/* Check Palindromes */
+/*******************************************
+ Check Palindromes 
+*/
 // Return true if the given string is a palindrome. Otherwise, return false
 // Palindromes are spelled the same way both forward and backward, ignoring punctuation, case, and spacing
 function palindrome(str) {
@@ -37,9 +40,9 @@ console.log(t1, t2, t3, t4, t5, t6);
 
 
 
-
-
-/* Longest Word */
+/*******************************************
+ Longest Word 
+*/
 // Return the length of the longest word in the provided sentence
 function findLongestWord(str) {
   str = str.split(' ');
