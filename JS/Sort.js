@@ -4,7 +4,7 @@ const randomArray = function(len = 10){
 }
 // ******************************************
 
-/*
+/*******************************************
 Bubble Sort
 */
 
@@ -31,7 +31,7 @@ function bubbleSort(arr) {
 
 bubbleSort(randomArray(100));
 
-/*
+/*******************************************
 Insertion Sort
 */
 
@@ -56,8 +56,8 @@ function insertSort(arr){
 insertSort(randomArray(100));
 
 
-/*
-Insertion Sort
+/*******************************************
+Merge Sort
 */
 
 function mergeSort(arr){
@@ -90,3 +90,25 @@ function mergeSort(arr){
 }
 
 mergeSort(randomArray(100));
+
+
+/*******************************************
+Quick Sort
+*/
+
+function quickSort(arr){
+
+	if(arr.length <= 1){
+		return arr;
+	} else {
+		const pivot = arr.pop(); 
+
+		const lessThanArr = arr.filter( i => i <= pivot);
+		const greaterThanArr = arr.filter( i => i > pivot);
+
+		return [...quickSort(lessThanArr), pivot, ...quickSort(greaterThanArr)];
+	}
+
+}
+
+quickSort(randomArray(50));
