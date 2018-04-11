@@ -24,6 +24,10 @@ This block should be thought of as a parent.
 .btn--big {}
 
 /**************************************************************************
+<a class="btn btn--big btn--orange" href="#">
+  <span class="btn__price">$9.99</span>
+  <span class="btn__text">Subscribe</span>
+</a>
 */
 
 
