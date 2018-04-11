@@ -1,0 +1,27 @@
+/* 
+Base rules 
+These are styles of the main website elements - body, input, button, ul, ol, etc. In this section, we use mainly HTML tags and attribute selectors, in exceptional cases - classes (for example, if you have JavaScript-style selections);
+
+Layout rules
+Here are the styles of global elements, the size of the cap, footer, sidebar, etc. Jonathan suggests using id here in selectors since these elements will not occur more than 1 time on the page. However, the author of the article considers this a bad practice (whenever an id appears in the styles, somewhere in the world the kitten is sad).
+
+Modules rules
+Blocks that can be used multiple times on a single page. For module classes, it is not recommended to use id and tag selectors (for reuse and context independence, respectively).
+
+State rules
+In this section, the various statuses of the modules and the basis of the site are prescribed. This is the only section in which the use of the keyword "! Important" is acceptable.
+
+Theme rules
+Design styles that you might need to replace
+
+ */
+
+
+/* Example Module */
+.btn { }
+
+/* Modifier of the btn class */
+.btn-primary { }
+
+/* Btn Module with State */
+.btn.is-collapsed { }

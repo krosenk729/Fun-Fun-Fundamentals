@@ -1,0 +1,50 @@
+
+/* Example Module */
+.mod { }
+
+/* Part of Module */
+.inner { }
+
+/* Talk Module */
+.talk { }
+
+/* Variation of part inside Module */
+.talk .inner { }
+
+
+/**************************************************************************
+<a class="btn btn--big btn--orange" href="#">
+  <span class="btn__price">$9.99</span>
+  <span class="btn__text">Subscribe</span>
+</a>
+*/
+
+.tooltip:hover .tooltip_body {
+	display: inline;
+	position: absolute;
+	text-decoration: none;
+	color: #000;
+	background: #FFFFAA;
+	border: 1px solid #DDCCAA;
+	-webkit-box-shadow: 3px 3px 8px #CCC;
+	-moz-box-shadow: 3px 3px 8px #CCC;
+	box-shadow: 3px 3px 8px #CCC;
+}
+.tooltip_body {
+	display: none;
+	padding: .5em;
+	margin-top: 1.5em;
+	z-index: 10;
+}
+
+/**************************************************************************
+<p>
+  <a href="#" class="tooltip">
+    Example of Text Tooltip
+    <span class="tooltip_body">Title</span>
+      <br>
+      Description of the tooltip.
+    </span>
+  </a>
+</p>
+*/

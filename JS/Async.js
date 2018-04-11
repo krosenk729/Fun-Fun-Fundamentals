@@ -65,3 +65,42 @@ async function ajaxasync() {
 
 ajaxasync();
 console.log('Ron once said,');
+
+
+// ********************************************
+// Async / Await verus Promises
+
+const makePromiseRequest = () =>
+getJSON()
+.then(data => {
+	console.log(data)
+	return "done"
+});
+
+const makeAsyncRequest = async () => {
+	console.log(await getJSON())
+	return "done"
+}
+
+makePromiseRequest();
+makeAsyncRequest();
+
+
+const makeAllPromisesRequest = () => {
+	return promise1()
+	.then(value1 => {
+		return promise2(value1)
+		.then(value2 => {  
+			return promise3(value1, value2)
+		})
+	})
+}
+
+const makeAllAsyncRequest = async () => {
+	const value1 = await promise1()
+	const value2 = await promise2(value1)
+	return promise3(value1, value2)
+}
+
+makeAllPromiseRequest();
+makeAllAsyncRequest();
