@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Focus Control</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <style>
+  .focus-modal {
+    width: 50%;
+    height: 300px;
+    border-radius: 5px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 24px;
+    background-color: #fff;
+    z-index: 3;
+    position: fixed;
+    top: 25%;
+    display: none;
+  }
+
+  .focus-modal-overlay {
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    background-color: #000;
+    opacity: 0.5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  #skip-link{
+    position: absolute;
+    left: -100px;
+    top: -100px;
+  }
+
+  #skip-link:active, 
+  #skip-link:focus {
+    position: relative;
+    left: 0px;
+    top: 0px;
+  }
+</style>
+
+</head>
+<body>
+  <a href="#form" id="skip-link">
+    Skip to form content
+  </a>
+  <nav class="navbar navbar-fixed-top">
+    <div class="container-fluid">
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <!-- Collect the nav links, forms, and other content for toggling -->
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <ul class="nav navbar-nav">
+          <li><a href="../index.html"><span class="glyphicon glyphicon-arrow-left"></span> Back</a></li>
+        </ul>
+      </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="content">
+    <div class="row">
+      <div class="col-md-10 col-md-offset-1">
+        <h1>Focus Control</h1>
+        <!-- A button to toggle the modal -->
+        <button class="focus-modal-button btn btn-primary">Click Me</button>
+        <!-- The actual modal -->
+        <div class="focus-modal">
+          <h1>Modal Title</h1>
+          <form>
+            <label for="first-name">First Name:</label>
+            <input type="text" name="first-name" id="first-name" />
+            <small>This one uses the <code>label for=</code> approach</small>
+            <label id="lst-name">Last Name:</label>
+            <input type="text" name="lst-name" aria-labelledby="lst-name" />
+            <small>This one uses the <code>input labeledby=</code> approach</small>
+            <button class="focus-modal-cancel">Cancel</button>
+            <input type="submit" value="Submit" />
+          </form>
+        </div>
+        <!-- A grey overlay for the background -->
+        <div class="focus-modal-overlay"></div>
+      </div>
+    </div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+  <script type="text/javascript">
+    var modal = document.querySelector('.focus-modal'),
+    modalButton = document.querySelector('.focus-modal-button'),
+    modalOverlay = document.querySelector('.focus-modal-overlay'),
+    cancelButton = document.querySelector('.focus-modal-cancel');
+
+    modalButton.addEventListener('click', open);
+    cancelButton.addEventListener('click', close);
+
+    // Get a list of tabbable elements here:
+    // https://github.com/jkup/focusable
+
+    function open() {
+      var focusableElements = modal.querySelectorAll('a[href], area[href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), button:not([disabled]), iframe, object, embed, [tabindex="0"], [contenteditable]');
+      focusableElements = Array.prototype.slice.call(focusableElements);
+      
+      var previouslyFocused = document.activeElement,
+      firstItem = focusableElements[0],
+      lastItem = focusableElements[focusableElements.length -1];
+
+      // Show the modal and overlay
+      modal.style.display = 'block';
+      modalOverlay.style.display = 'block';
+
+      // Close modal when press esc key
+      // Otherwise, trap within modal
+      
+      modal.addEventListener('keydown', trapTabKey);
+      modalOverlay.addEventListener('click', close);
+      firstItem.focus(); 
+      
+      function trapTabKey(event){
+        if(event.keyCode === 9){ //tab key
+          if(event.shiftKey && document.activeElement === firstItem){
+            event.preventDefault();
+            lastItem.focus();
+          }
+          if(!event.shiftKey && document.activeElement === lastItem){
+            event.preventDefault();
+            firstItem.focus();
+          }
+        } 
+        if(event.keyCode === 27){ //esc key
+          close();
+        }
+      }
+    }
+
+    function close() {
+      // Hide the modal and overlay
+      modal.style.display = 'none';
+      modalOverlay.style.display = 'none';
+    }
+
+  </script>
+</body>
+</html>
