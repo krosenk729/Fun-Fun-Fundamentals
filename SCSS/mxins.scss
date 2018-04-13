@@ -2,7 +2,12 @@
 // Utilities 
 // **************************************************************/
 
-@mixin boxshadow($insetH: 0, $insetV: 1px, $insetB: 3px, $insetC: rgba(0, 0, 0, 0.3), $outsetH: 0, $outsetV: 1px, $outsetB: 3px, $outsetC: rgba(255, 255, 255, 0.3)){
+@mixin boxshadow($horiz: 0, $vert: 2px, $blur: 5px, $col: rgba(0, 0, 0, 0.26)){
+	-webkit-box-shadow: $horiz $vert $blur $col;
+	box-shadow: $horiz $vert $blur $col;
+}
+
+@mixin boxshadowInner($insetH: 0, $insetV: 1px, $insetB: 3px, $insetC: rgba(0, 0, 0, 0.3), $outsetH: 0, $outsetV: 1px, $outsetB: 3px, $outsetC: rgba(255, 255, 255, 0.3)){
 	-webkit-box-shadow: inset $insetH $insetV $insetB $insetC, $outsetH $outsetV $outsetB $outsetC;
 	box-shadow: inset $insetH $insetV $insetB $insetC, $outsetH $outsetV $outsetB $outsetC;
 }
@@ -21,4 +26,41 @@
 	background: -o-linear-gradient($left, $right);
 	background: -moz-linear-gradient($left, $right);
 	background: linear-gradient($left, $right);
+}
+
+// **************************************************************/
+// Buttons 
+// **************************************************************/
+
+
+@mixin buttonMaker($bgColor, $bordColor, $textColor, $activeBg: transparent, $activeCol: $bgColor){
+	background: $bgColor;
+	border: 2px solid $bordColor;
+	color: $textColor;
+	padding: .65em 1em;
+	border-radius: 8.5px;
+	@include transition;
+
+	&:active,
+	&:hover{
+		background: $activeBg;
+		border: 2px solid $bordColor;
+		text-decoration: none;
+		color: $activeCol;
+		@include boxshadow;
+	}
+}
+
+$c-green: #2a5941;
+$c-pink: #ff008c;
+$c-white: #FFFFFF;
+
+button.primary-btn{
+	@include buttonMaker($c-pink, $c-pink, $c-white);
+}
+button.primary-green-btn{
+	@include buttonMaker($c-green, $c-green, $c-white, transparentize($c-green, .5), $c-white);
+}
+button.link-btn{
+	@include buttonMaker(transparent, transparent, $c-pink, transparent, $c-green);
 }

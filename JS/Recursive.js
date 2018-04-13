@@ -80,3 +80,85 @@ var t3 = pathFind( 3, 3 ) === 6;
 var t4 = pathFind( 10, 1 ) === 1;
 console.log(t1, t2, t3, t4);
 
+// Given the size of a grid (X rows and Y columns),
+// write a function that returns the number of possible
+// paths one can take starting at the top left of the grid
+// and ending at the bottom right, assuming you can only
+// move to the right and down.
+function countSteps(x, y){
+	console.log(`x is ${x}, y is ${y}`);
+	if(x <= 1 && y <= 1){
+		return 0;
+	}
+	const down = y <= 1 ? 0 : 1 + countSteps( x, Math.max(1, --y)) ;
+	const right = x <= 1 ? 0 : 1 + countSteps( Math.max(1, --x), y ) ;
+	return right + down;
+}
+
+/*******************************************
+ Greatest Divisor
+*/
+// Write a function that takes two numbers and returns the greatest common divisor
+
+function greatestDivisor(num1, num2){
+	const min = Math.min(num1, num2);
+	const max = Math.max(num1, num2);
+	if( max % min === 0){ return min }
+	return greatestDivisor(min, max % min);
+}
+
+// test 
+var t1 = typeof greatestDivisor( 1, 1 ) === 'number';
+var t2 = greatestDivisor( 54, 24 ) === 6;
+var t3 = greatestDivisor( 89, 15 ) === 1;
+var t4 = greatestDivisor( 90, 15 ) === 15;
+console.log(t1, t2, t3, t4);
+
+
+/*******************************************
+ Color Fill
+*/
+// Implement a function that takes in a two-dimensional screen represented as a 2-d array of color numbers,
+// a point in the array, and a color. The function will change the original color of the point
+// to the new color and will fill surrounding neighbors with the new color *if* the neighbor has 
+// the same original color as the point
+
+function colorFill(screen, point, color){
+	const original = screen[point[0]][point[1]];
+	const recurse = function(row, column){
+		screen[row][column] = color;
+		if(screen[row - 1] && screen[row - 1][column] === original) recurse(row - 1, column);
+		if(screen[row + 1] && screen[row + 1][column] === original) recurse(row + 1, column);
+		if(screen[row][column - 1] === original) recurse(row, column - 1);
+		if(screen[row][column + 1] === original) recurse(row, column + 1);
+	}
+	recurse([point[0]][point[1]]);
+	return screen;
+}
+
+
+var screen1 = [
+  [1,1,1,1,1,1,1],
+  [1,2,2,2,2,1,1],
+  [3,3,3,2,2,2,1],
+  [1,1,2,2,2,3,3],
+  [1,1,1,1,3,3,3]
+];
+console.log(paintFill(screen1, [4, 5], 5));
+var screen2 = [
+  [1,1,1,1,1,1,1],
+  [1,2,2,2,2,1,1],
+  [3,3,3,2,2,2,1],
+  [1,1,2,2,2,5,5],
+  [1,1,1,1,5,5,5]
+];
+
+console.log(paintFill(screen1, [0, 0], 5));
+var screen3 = [
+  [5,5,5,5,5,5,5],
+  [5,2,2,2,2,5,5],
+  [3,3,3,2,2,2,5],
+  [1,1,2,2,2,5,5],
+  [1,1,1,1,5,5,5]
+];
+

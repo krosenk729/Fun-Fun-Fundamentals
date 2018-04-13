@@ -158,7 +158,6 @@ Queue.prototype.until = function(val){
 /********************************************* 
 ARRAY LIST
 */
-
 // https://codepen.io/btholt/pen/dGOaXX?editors=001
 
 

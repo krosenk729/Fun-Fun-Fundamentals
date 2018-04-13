@@ -1,3 +1,6 @@
+/* 
+Basically, a CSS “object” is a repeating visual pattern, that can be abstracted into an independent snippet of HTML, CSS, and possibly JavaScript
+*/
 
 /* Example Module */
 .mod { }
@@ -13,10 +16,13 @@
 
 
 /**************************************************************************
-<a class="btn btn--big btn--orange" href="#">
-  <span class="btn__price">$9.99</span>
-  <span class="btn__text">Subscribe</span>
-</a>
+<div class="mod">
+        <div class="inner">
+                <div class="hd">Block Head</div>
+                <div class="bd">Block Body</div>
+                <div class="ft">Block Foot</div>
+        </div>
+</div>
 */
 
 .tooltip:hover .tooltip_body {
@@ -47,4 +53,32 @@
     </span>
   </a>
 </p>
+*/
+
+/*Wrapper for the media object*/
+.media{  }
+
+/*Child node of the media object. Generally a link, image, or flash wrapper. 
+Will appear to the left of the .bd. Optional region.*/
+.img{  }
+
+/*Main content area for the media object, can contain any other objects. 
+Protected. Required region.*/
+.bd{  }
+
+/*Child node of the media object. Generally a link, image, or flash wrapper. 
+Will appear to the right of the .bd. Optional region.*/
+.imgExt{  }
+
+
+/**************************************************************************
+<div class="media">
+	<a href="http://twitter.com/stubbornella" class="img">
+		<img src="http://a3.twimg.com/profile_images/72157651/tattoo_pink_bkg_square_mini.jpg" alt="Stubbornella" />
+	</a>
+	<div class="bd">
+		<a href="http://twitter.com/stubbornella">@Stubbornella</a> <span class="detail">14 miniutes ago</span>
+	</div>
+</div>
+
 */
